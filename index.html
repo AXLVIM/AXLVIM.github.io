@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourBrand | Modern Minimalist</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for a clean, modern sans-serif look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">TR<span class="accent">ON</span></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-greeting">Hello, I'm</p>
+                    <h1 class="hero-title">Alex Murphy<span class="cursor">_</span></h1>
+                    <div class="dynamic-text">
+                        <span class="static-text">I build &nbsp;</span>
+                        <span class="dynamic-word" id="dynamic-word"></span>
+                    </div>
+                    <p class="hero-desc">Crafting digital experiences with a focus on <span class="accent-text">modern minimalist design</span> and intuitive user interfaces.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View Work</a>
+                        <a href="#contact" class="btn btn-secondary">Let's Talk</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="mouse"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About <span class="accent">Me</span></h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>I'm a creative developer & designer</h3>
+                        <p>Based in the digital realm, I specialize in creating clean, functional, and visually striking web experiences. My approach is rooted in minimalism, focusing on what's essential to deliver your message with clarity and impact.</p>
+                        <p>With a passion for modern web technologies, I turn ideas into reality, ensuring every interaction is smooth, intentional, and user-centric.</p>
+                        <div class="about-stats">
+                            <div class="stat">
+                                <h4>5+</h4>
+                                <p>Years Experience</p>
+                            </div>
+                            <div class="stat">
+                                <h4>50+</h4>
+                                <p>Projects Completed</p>
+                            </div>
+                            <div class="stat">
+                                <h4>24/7</h4>
+                                <p>Support</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-blob"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>My <span class="accent">Services</span></h2>
+                    <div class="underline"></div>
+                    <p>What I can do for you</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Web Development</h3>
+                        <p>Fast, responsive, and scalable websites built with the latest technologies.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>UI/UX Design</h3>
+                        <p>User-centered design that focuses on aesthetics and seamless functionality.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Responsive Design</h3>
+                        <p>Flawless experiences across all devices, from desktops to smartphones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get in <span class="accent">Touch</span></h2>
+                    <div class="underline"></div>
+                    <p>Have a project in mind? Let's work together.</p>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">YOUR<span class="accent">BRAND</span></div>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="LinkedIn">🔗</a>
+                    <a href="#" aria-label="Dribbble">⚽</a>
+                </div>
+                <p>© 2026 YourBrand. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
