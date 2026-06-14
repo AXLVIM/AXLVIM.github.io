@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ========================
-    // 1. Dynamic Typing Effect
+    // 1. Dynamic Typing Effect (UPDATED FOR CYBERSECURITY)
     // ========================
-    const words = ['Websites', 'Interfaces', 'Experiences', 'Dreams'];
+    const words = ['Networks', 'Infrastructures', 'Environments', 'Protocols'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeEffect, speed);
     }
     
-    typeEffect();
+    if (dynamicWordElement) {
+        typeEffect();
+    }
     
     // ========================
     // 2. Navbar Scroll Effect
@@ -51,31 +53,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ========================
-    // 3. Mobile Menu Toggle
+    // 3. Mobile Hamburger Menu
     // ========================
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
     
     hamburger.addEventListener('click', function() {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
     });
     
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         });
     });
     
     // ========================
-    // 4. Back to Top Button
+    // 4. Back To Top Button
     // ========================
     const backToTopBtn = document.getElementById('backToTop');
     
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 500) {
             backToTopBtn.classList.add('show');
         } else {
             backToTopBtn.classList.remove('show');
@@ -90,76 +92,64 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ========================
-    // 5. Smooth Parallax Effect
+    // 5. Smooth Parallax Effect for Hero
     // ========================
-    const aboutSection = document.querySelector('.about');
-    const servicesSection = document.querySelector('.services');
-    
+    const heroContent = document.querySelector('.hero-content');
     window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        
-        if (aboutSection) {
-            const aboutTop = aboutSection.getBoundingClientRect().top + window.scrollY;
-            if (window.scrollY + window.innerHeight > aboutTop) {
-                const offset = scrolled * 0.1;
-                aboutSection.style.transform = `translateY(${offset}px)`;
-            }
-        }
-        
-        if (servicesSection) {
-            const servicesTop = servicesSection.getBoundingClientRect().top + window.scrollY;
-            if (window.scrollY + window.innerHeight > servicesTop) {
-                const offset = scrolled * 0.05;
-                servicesSection.style.transform = `translateY(${offset}px)`;
-            }
+        let scrollValue = window.scrollY;
+        if (scrollValue < window.innerHeight && heroContent) {
+            heroContent.style.transform = `translateY(${scrollValue * 0.4}px)`;
+            heroContent.style.opacity = 1 - (scrollValue / (window.innerHeight * 0.8));
         }
     });
     
     // ========================
-    // 6. Intersection Observer for Animations
+    // 6. Intersection Observer for Animations (UPDATED TO CAPTURE ALL CARDS)
     // ========================
     const animatedElements = document.querySelectorAll('.service-card, .about-content, .contact-form');
-
-const animationObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-            // Optional: keep observing? No, we can unobserve after animation
-            animationObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.2 }); // Trigger when 20% of element is visible
-
-animatedElements.forEach(el => {
-    animationObserver.observe(el);
-});
-
-// Fallback: if observer fails or browser doesn't support it, show all elements anyway
-if (!window.IntersectionObserver) {
+    
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                animationObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 }); // Reduced slightly to ensure cards trigger animations cleanly
+    
     animatedElements.forEach(el => {
-        el.classList.add('animate');
+        animationObserver.observe(el);
     });
-}
+    
+    // Fallback: if observer fails or browser doesn't support it, show all elements anyway
+    if (!window.IntersectionObserver) {
+        animatedElements.forEach(el => {
+            el.classList.add('animate');
+        });
+    }
+    
     // ========================
     // 7. Form Submission Handler
     // ========================
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        formStatus.innerHTML = '<span style="color: #00ff88;">Sending message...</span>';
-        
-        // Simulate form submission with a delay
-        setTimeout(() => {
-            formStatus.innerHTML = '<span style="color: #00ff88;">✓ Message sent successfully! We\'ll get back to you soon.</span>';
-            contactForm.reset();
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Clear success message after 5 seconds
+            formStatus.innerHTML = '<span style="color: #00ff88;">Sending message...</span>';
+            
+            // Simulate form submission with a delay
             setTimeout(() => {
-                formStatus.innerHTML = '';
-            }, 5000);
-        }, 1500);
-    });
+                formStatus.innerHTML = '<span style="color: #00ff88;">✓ Message sent successfully! We\'ll get back to you soon.</span>';
+                contactForm.reset();
+                
+                // Clear success message after 5 seconds
+                setTimeout(() => {
+                    formStatus.innerHTML = '';
+                }, 5000);
+            }, 1500);
+        });
+    }
 });
