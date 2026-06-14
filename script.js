@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ========================
-    // 1. Dynamic Typing Effect (UPDATED FOR CYBERSECURITY)
+    // 1. Dynamic Typing Effect
     // ========================
-    const words = ['Networks', 'Infrastructures', 'Environments', 'Protocols'];
+    const words = ['Networks', 'Infrastructures', 'Environments', 'Systems'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -36,9 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeEffect, speed);
     }
     
-    if (dynamicWordElement) {
-        typeEffect();
-    }
+    typeEffect();
     
     // ========================
     // 2. Navbar Scroll Effect
@@ -53,31 +51,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ========================
-    // 3. Mobile Hamburger Menu
+    // 3. Mobile Menu Toggle
     // ========================
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
     
     hamburger.addEventListener('click', function() {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
     });
     
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         });
     });
     
     // ========================
-    // 4. Back To Top Button
+    // 4. Back to Top Button
     // ========================
     const backToTopBtn = document.getElementById('backToTop');
     
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
+        if (window.scrollY > 300) {
             backToTopBtn.classList.add('show');
         } else {
             backToTopBtn.classList.remove('show');
@@ -92,22 +90,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ========================
-    // 5. Smooth Parallax Effect for Hero
+    // 5. Clean Fade Parallax Effect for Hero
     // ========================
     const heroContent = document.querySelector('.hero-content');
     window.addEventListener('scroll', function() {
         let scrollValue = window.scrollY;
         if (scrollValue < window.innerHeight && heroContent) {
-            heroContent.style.transform = `translateY(${scrollValue * 0.4}px)`;
-            heroContent.style.opacity = 1 - (scrollValue / (window.innerHeight * 0.8));
+            // Gently slides down and fades out cleanly as you scroll down
+            heroContent.style.transform = `translateY(${scrollValue * 0.3}px)`;
+            heroContent.style.opacity = 1 - (scrollValue / (window.innerHeight * 0.7));
         }
     });
     
     // ========================
-    // 6. Intersection Observer for Animations (UPDATED TO CAPTURE ALL CARDS)
+    // 6. Intersection Observer for Animations
     // ========================
     const animatedElements = document.querySelectorAll('.service-card, .about-content, .contact-form');
-    
+
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -115,19 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 animationObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 }); // Reduced slightly to ensure cards trigger animations cleanly
-    
+    }, { threshold: 0.1 }); // Adjusted to 0.1 to cleanly trigger animations on all display sizes
+
     animatedElements.forEach(el => {
         animationObserver.observe(el);
     });
-    
+
     // Fallback: if observer fails or browser doesn't support it, show all elements anyway
     if (!window.IntersectionObserver) {
         animatedElements.forEach(el => {
             el.classList.add('animate');
         });
     }
-    
+
     // ========================
     // 7. Form Submission Handler
     // ========================
