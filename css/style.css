@@ -1,3 +1,34 @@
+/* Color Theme Variables & Tokens */
+:root {
+    --bg-color: #0a0a0a;
+    --hero-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    --card-bg: #111111;
+    --text-color: #e0e0e0;
+    --text-muted: #888888;
+    --navbar-bg: rgba(10, 10, 10, 0.95);
+    --navbar-scrolled: rgba(10, 10, 10, 0.98);
+    --accent-color: #00ff88;
+    --accent-gradient: linear-gradient(135deg, #00ff88, #00b8ff);
+    --border-color: #222222;
+    --input-bg: #111111;
+    --footer-bg: #060606;
+}
+
+[data-theme="light"] {
+    --bg-color: #f5f7fa;
+    --hero-bg: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    --card-bg: #ffffff;
+    --text-color: #1a1d20;
+    --text-muted: #626d7a;
+    --navbar-bg: rgba(245, 247, 250, 0.95);
+    --navbar-scrolled: rgba(245, 247, 250, 0.98);
+    --accent-color: #00aa5b; /* Darker green variant for optimal visual contrast */
+    --accent-gradient: linear-gradient(135deg, #00aa5b, #007acc);
+    --border-color: #e2e8f0;
+    --input-bg: #ffffff;
+    --footer-bg: #edf1f7;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -413,17 +444,6 @@ input:focus, textarea:focus {
     font-weight: 700;
 }
 
-.social-links a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-size: 1.5rem;
-    margin: 0 10px;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: #00ff88;
-}
 
 /* Back to Top Button */
 .back-to-top {
@@ -518,3 +538,47 @@ input:focus, textarea:focus {
         grid-template-columns: 1fr;
     }
 }
+.social-links {
+    display: flex;
+    text-decoration: none;
+    /* list-style: none; */
+    list-style-type: none;
+    gap: 20px;
+}
+.social_links__item {
+    padding: 0;
+    margin: 0;
+    width: 42px;
+}
+.social_links__item a {
+    background-color: red;
+    padding: 0;
+    margin: 0;
+    /* width: 42px; */
+}
+
+.social_links__item a:hover {
+    text-decoration: underline;
+}
+.social-links__item img{
+    max-width: 100%;
+    display: block;
+    height: 24px;
+    width: 24px;
+}
+
+
+/* 
+.social-links a {
+    display: block;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.5rem;
+ margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+
+.social-links a:hover {
+    color: #00ff88;
+} */

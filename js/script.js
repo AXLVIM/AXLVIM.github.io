@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeEffect, speed);
     }
     
-    typeEffect();
+    if (dynamicWordElement) {
+        typeEffect();
+    }
     
     // ========================
     // 2. Navbar Scroll Effect
@@ -56,16 +58,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
     
     // Close mobile menu when clicking a link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+            if (hamburger && navMenu) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
         });
     });
     
@@ -75,19 +81,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const backToTopBtn = document.getElementById('backToTop');
     
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
+        if (backToTopBtn) {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
         }
     });
     
-    backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
     
     // ========================
     // 5. Clean Fade Parallax Effect for Hero
@@ -96,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         let scrollValue = window.scrollY;
         if (scrollValue < window.innerHeight && heroContent) {
-            // Gently slides down and fades out cleanly as you scroll down
             heroContent.style.transform = `translateY(${scrollValue * 0.3}px)`;
             heroContent.style.opacity = 1 - (scrollValue / (window.innerHeight * 0.7));
         }
@@ -114,13 +123,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 animationObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 }); // Adjusted to 0.1 to cleanly trigger animations on all display sizes
+    }, { threshold: 0.1 });
 
     animatedElements.forEach(el => {
         animationObserver.observe(el);
     });
 
-    // Fallback: if observer fails or browser doesn't support it, show all elements anyway
     if (!window.IntersectionObserver) {
         animatedElements.forEach(el => {
             el.classList.add('animate');
@@ -128,23 +136,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================
-    // 7. Form Submission Handler
+    // 7. Theme Switcher (Dark/Light Mode)
+    // ========================
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Check for saved theme preference, default to dark mode if empty
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'light' && themeToggleBtn) {
+            themeToggleBtn.textContent = '☀️';
+        }
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function() {
+            let theme = document.documentElement.getAttribute('data-theme');
+            
+            if (theme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+                themeToggleBtn.textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggleBtn.textContent = '☀️';
+            }
+        });
+    }
+
+    // ========================
+    // 8. Form Submission Handler
     // ========================
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
     
-    if (contactForm) {
+    if (contactForm && formStatus) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            formStatus.innerHTML = '<span style="color: #00ff88;">Sending message...</span>';
+            formStatus.innerHTML = '<span style="color: var(--accent-color);">Sending message...</span>';
             
-            // Simulate form submission with a delay
             setTimeout(() => {
-                formStatus.innerHTML = '<span style="color: #00ff88;">✓ Message sent successfully! We\'ll get back to you soon.</span>';
+                formStatus.innerHTML = '<span style="color: var(--accent-color);">✓ Message sent successfully! We\'ll get back to you soon.</span>';
                 contactForm.reset();
                 
-                // Clear success message after 5 seconds
                 setTimeout(() => {
                     formStatus.innerHTML = '';
                 }, 5000);
